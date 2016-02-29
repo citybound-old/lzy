@@ -1,3 +1,12 @@
+*This code is part of and developed for [Citybound](http://cityboundsim.com).
+At some point in the future it might become stable and generally useful!*
+
+# Lzy
+
+## Lazy sequences and iterators for C++11
+
+
+```c++
 #include <iostream>
 #include <list>
 #include <vector>
@@ -23,3 +32,8 @@ int main() {
 
     return 0;
 }
+```
+
+## License
+
+MIT, see [LICENSE.md](LICENSE.md) for details.
