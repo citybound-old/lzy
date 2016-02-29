@@ -10,11 +10,10 @@ namespace lzy {
         using item = SequenceItemType<Sequence>;
     public:
         filter_sequence(Sequence &&source, Predicate predicateFunction)
-                : source(std::move(source)), predicateFunction(predicateFunction), started(false), test(43) { };
+                : source(std::move(source)), predicateFunction(predicateFunction), started(false) {};
 
         filter_sequence(filter_sequence &&other)
-                : source(std::move(other.source)), predicateFunction(other.predicateFunction), started(other.started),
-                  test(44) { };
+                : source(std::move(other.source)), predicateFunction(other.predicateFunction), started(other.started) {};
 
         bool done() {
             if (source.done()) return true;
@@ -38,7 +37,6 @@ namespace lzy {
         Sequence source;
         Predicate predicateFunction;
         bool started;
-        int test;
     };
 
     template<typename Predicate>
