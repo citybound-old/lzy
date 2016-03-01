@@ -8,6 +8,8 @@
 #include "mappers/filter.h"
 #include "mappers/map.h"
 #include "mappers/take.h"
+#include "mappers/drop.h"
+#include "mappers/slice.h"
 
 #include "reducers/to_container.h"
 

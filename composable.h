@@ -35,6 +35,26 @@ namespace lzy {
         }
     };
 
+    template<typename FirstComposable, typename SecondComposable>
+    class owning_composition : public composable<owning_composition<FirstComposable, SecondComposable>> {
+    public:
+        owning_composition (FirstComposable&& first, SecondComposable&& second)
+                : first(std::move(first)), second(std::move(second)) {};
+
+        template<typename Input>
+        using FirstResult = typename std::result_of<FirstComposable(Input)>::type;
+
+        template<typename Input>
+        using EndResult = typename std::result_of<SecondComposable(FirstResult<Input>)>::type;
+
+        template<typename Input>
+        EndResult<Input> operator() (Input&& input) {
+            return second(first(std::move(input)));
+        }
+    private:
+        FirstComposable first;
+        SecondComposable second;
+    };
 }
 
 
