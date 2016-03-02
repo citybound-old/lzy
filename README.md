@@ -10,7 +10,6 @@ At some point in the future it might become stable and generally useful!*
 #include <iostream>
 #include <list>
 #include <vector>
-#include <list>
 
 #include "lzy.h"
 
