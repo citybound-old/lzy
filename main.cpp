@@ -1,7 +1,6 @@
 #include <iostream>
 #include <list>
 #include <vector>
-#include <list>
 
 #include "lzy.h"
 
