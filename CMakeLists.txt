@@ -3,7 +3,5 @@ project(lzy)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-include_directories(deps)
-
 set(SOURCE_FILES main.cpp)
 add_executable(lzy ${SOURCE_FILES})

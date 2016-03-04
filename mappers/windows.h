@@ -2,7 +2,7 @@
 #define LZY_WINDOWS_H
 
 #include "../common.h"
-#include "embxx/container/StaticQueue.h"
+#include "../deps/static-queue/StaticQueue.h"
 
 namespace lzy {
 
@@ -10,7 +10,7 @@ namespace lzy {
     class window_sequence : public sequence<window_sequence<Sequence, windowSize>> {
         using itemReference = SequenceItemType<Sequence>;
         typedef typename std::remove_reference<itemReference>::type item;
-        using StaticQueueType = embxx::container::StaticQueue<std::reference_wrapper<item>, windowSize>;
+        using StaticQueueType = squeue::StaticQueue<std::reference_wrapper<item>, windowSize>;
     public:
         window_sequence(Sequence &&source)
                 : source(std::move(source)) { };

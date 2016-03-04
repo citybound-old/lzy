@@ -1,0 +1,3 @@
+[submodule "deps/static-queue"]
+	path = deps/static-queue
+	url = https://github.com/citybound/static-queue.git
