@@ -75,4 +75,4 @@ int main() {
 ## License
 
 MIT, see [LICENSE.md](LICENSE.md) for details.
-Dependencies are also licensed under MIT, see [StaticQueue.h](deps/embxx/container/StaticQueue.h) and [SizeToType.h](deps/embxx/util/SizeToType.h)
+Dependencies are also licensed under MIT, see [static-queue/README.md](deps/static-queue/README.md)
