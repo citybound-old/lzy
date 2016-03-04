@@ -13,13 +13,6 @@ At some point in the future it might become stable and generally useful!*
 
 #include "lzy.h"
 
-int main() {
-#include <iostream>
-#include <list>
-#include <vector>
-
-#include "lzy.h"
-
 using namespace lzy;
 
 int main() {
