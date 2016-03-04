@@ -38,7 +38,11 @@ namespace lzy {
     };
 
     template<typename FirstSequence, typename SecondSequence>
-    concatenation_sequence<FirstSequence, SecondSequence> operator + (FirstSequence&& first, SecondSequence&& second) {
+    typename std::enable_if<
+            FirstSequence::isLazySequence::value && SecondSequence::isLazySequence::value,
+            concatenation_sequence<FirstSequence, SecondSequence>
+    >::type
+    operator + (FirstSequence&& first, SecondSequence&& second) {
         return concatenation_sequence<FirstSequence, SecondSequence>(std::move(first), std::move(second));
     };
 

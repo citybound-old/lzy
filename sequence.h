@@ -51,6 +51,8 @@ namespace lzy {
         };
 
     public:
+        using isLazySequence = std::true_type;
+
         sequence_iterator begin() {
             return sequence_iterator(*(static_cast<Derived *>(this)));
         }
