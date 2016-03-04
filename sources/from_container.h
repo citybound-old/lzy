@@ -13,6 +13,9 @@ namespace lzy {
         container_sequence(Container &container)
                 : iteratorCurrent(std::begin(container)), iteratorEnd(std::end(container)) { }
 
+        container_sequence(Container &&container)
+                : iteratorCurrent(std::begin(container)), iteratorEnd(std::end(container)) { }
+
         container_sequence(container_sequence &&other)
                 : iteratorCurrent(std::move(other.iteratorCurrent)), iteratorEnd(std::move(other.iteratorEnd)) { };
 
@@ -36,6 +39,11 @@ namespace lzy {
     template<typename Container>
     container_sequence<Container> from(Container &container) {
         return container_sequence<Container>(container);
+    };
+
+    template<typename Container>
+    container_sequence<Container> from(Container&& container) {
+        return container_sequence<Container>(std::move(container));
     };
 
 }

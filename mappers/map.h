@@ -8,7 +8,6 @@ namespace lzy {
     template<typename Sequence, typename MappingFunction>
     class map_sequence : public sequence<map_sequence<Sequence, MappingFunction>> {
         using SourceItem = SequenceItemType<Sequence>;
-        using MappedItem = typename std::result_of<MappingFunction(SourceItem)>::type;
     public:
         map_sequence(Sequence &&source, MappingFunction mappingFunction)
                 : source(std::move(source)), mappingFunction(mappingFunction) { };
@@ -20,13 +19,23 @@ namespace lzy {
 
         void advance() { source.advance(); };
 
-        MappedItem current() {
-            return mappingFunction(source.current());
+        auto current() -> decltype(applyMapping(std::declval<MappingFunction>(), std::declval<Sequence&>())){
+            return applyMapping(mappingFunction, source);
         }
 
     private:
         Sequence source;
         MappingFunction mappingFunction;
+    };
+
+    template<typename MappingFunction, typename Sequence>
+    auto applyMapping(MappingFunction mappingFunction, Sequence& source) -> decltype(mappingFunction(source.current())) {
+        return mappingFunction(source.current());
+    };
+
+    template<typename MappingFunction, typename Sequence>
+    auto applyMapping(MappingFunction mappingFunction, Sequence& source) -> decltype((source.current().*mappingFunction)()) {
+        return (source.current().*mappingFunction)();
     };
 
     template<typename MappingFunction>

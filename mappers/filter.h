@@ -17,7 +17,7 @@ namespace lzy {
 
         bool done() {
             if (source.done()) return true;
-            else if (!started && !predicateFunction(source.current())) {
+            else if (!started && !applyPredicate(predicateFunction, source)) {
                 started = true;
                 advance();
                 return source.done();
@@ -27,7 +27,7 @@ namespace lzy {
         void advance() {
             while (!source.done()) {
                 source.advance();
-                if (predicateFunction(source.current())) return;
+                if (applyPredicate(predicateFunction, source)) return;
             }
         }
 
@@ -37,6 +37,16 @@ namespace lzy {
         Sequence source;
         Predicate predicateFunction;
         bool started;
+    };
+
+    template <typename Predicate, typename Sequence>
+    auto applyPredicate(Predicate predicate, Sequence& sequence) -> decltype(predicate(sequence.current())) {
+        return predicate(sequence.current());
+    };
+
+    template <typename Predicate, typename Sequence>
+    auto applyPredicate(Predicate predicate, Sequence& sequence) -> decltype((sequence.current().*predicate)()) {
+        return (sequence.current().*predicate)();
     };
 
     template<typename Predicate>
