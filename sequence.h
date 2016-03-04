@@ -9,12 +9,12 @@ namespace lzy {
     class sequence : public pushable<Derived> {
         class sequence_iterator {
             using item = SequenceItemType<Derived>;
-
+            typedef typename std::remove_reference<item>::type itemWithoutReference;
             friend class sequence;
 
         public:
             typedef item value_type;
-            typedef item *pointer;
+            typedef itemWithoutReference *pointer;
             typedef item &reference;
             typedef void difference_type;
             typedef std::input_iterator_tag iterator_category;
@@ -39,7 +39,7 @@ namespace lzy {
             };
 
             pointer operator->() const {
-                return &sequence.current();
+                return std::addressof(sequence.current());
             };
         private:
             sequence_iterator(Derived &sequence, bool forceSentinel = false) : sequence(sequence) {

@@ -11,26 +11,26 @@ namespace lzy {
         using item = ContainerItemType<Container>;
     public:
         container_sequence(Container &container)
-                : curr(std::begin(container)), end(std::end(container)) { }
+                : iteratorCurrent(std::begin(container)), iteratorEnd(std::end(container)) { }
 
         container_sequence(container_sequence &&other)
-                : curr(std::move(other.curr)), end(std::move(other.end)) { };
+                : iteratorCurrent(std::move(other.iteratorCurrent)), iteratorEnd(std::move(other.iteratorEnd)) { };
 
         bool done() {
-            return curr == end;
+            return iteratorCurrent == iteratorEnd;
         }
 
         void advance() {
-            curr++;
+            iteratorCurrent++;
         }
 
-        const item &current() {
-            return *curr;
+        const item& current() {
+            return *iteratorCurrent;
         }
 
     private:
-        iterator curr;
-        iterator end;
+        iterator iteratorCurrent;
+        iterator iteratorEnd;
     };
 
     template<typename Container>
