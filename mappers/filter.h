@@ -25,8 +25,9 @@ namespace lzy {
         };
 
         void advance() {
-            while (!source.done()) {
+            while (true) {
                 source.advance();
+                if (source.done()) return;
                 if (applyPredicate(predicateFunction, source)) return;
             }
         }
