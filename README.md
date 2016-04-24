@@ -1,9 +1,9 @@
-*Dieser Code ist Teil von und entwickelt für [Citybound](http://cityboundsim.com).
-Irgendwann könnte er stabil und allgemein benutzbar werden!!*
+*This code is part of and developed for [Citybound](http://cityboundsim.com).
+At some point in the future it might become stable and generally useful!*
 
 # Lzy
 
-## Faule Sequenzen und Iterationen für C++11
+## Lazy sequences and iterators for C++11
 
 
 ```c++
@@ -20,18 +20,18 @@ int main() {
 
     auto iteration = filter([](int i) {return i % 2 == 0;}) | map([](int i) {return i * 1.1;});
 
-    // iteriere direkt über eine Sequenz
+    // iterate directly over a sequence
     for (auto d : from(aCoupleNumbers) >> iteration) {
         std::cout << d << ", ";
     }
     std::cout << std::endl;
-    // Ausgabe: 2.2, 4.4, 6.6, 8.8, 11, 13.2,
+    // output: 2.2, 4.4, 6.6, 8.8, 11, 13.2,
 
-    // Iterationen werden mittendrin komponiert und die Sequenz in einen Behälter ausgegeben
+    // compose iterations on the fly and create a container from a sequence
     auto list = from(aCoupleNumbers) >> (iteration | take(3)) >> to<std::list<double>>();
-    // list enthält 2.2, 4.4, 6.6
+    // list contains 2.2, 4.4, 6.6
 
-    // Sequenzen aneinanderhängen
+    // concatenate sequences
     std::vector<int> first = {1, 2, 3};
     std::vector<int> second = {4, 5, 6};
 
@@ -39,30 +39,30 @@ int main() {
         std::cout << d << ", ";
     }
     std::cout << std::endl;
-    // Ausgabe: 2, 4, 6, 8, 10, 12,
+    // output: 2, 4, 6, 8, 10, 12,
 
-    // Über eine Sequenz reduzieren
+    // reduce over a sequence
     std::cout << "sum: " << (from(aCoupleNumbers) >> reduce(std::plus<int>(), 0)) << std::endl;
     // output: sum: 78
 
-    // Sich über eine Sequenz schiebende Fenster (hier mit Größe 3)
+    // sliding windows (of size 3 here) over a sequence
     for (auto w : from(aCoupleNumbers) >> (windows<3>() | slice(3, 6))) {
         for (auto i : w) {
             std::cout << i << ",";
         }
         std::cout << std::endl;
     }
-    // Ausgabe:
+    // output:
     // 4,5,6,
     // 5,6,7,
     // 6,7,8,
 
 
-    // Zwei Sequenzen zusammenreißverschließen
+    // zip two sequences together
     for (auto pair : zip(from(first), from(second))) {
         std::cout << "(" << pair.first << ", " << pair.second << ")" << std::endl;
     }
-    // Ausgabe:
+    // output:
     // (1, 4)
     // (2, 5)
     // (3, 6)
@@ -72,7 +72,7 @@ int main() {
 
 ```
 
-## Lizenz
+## License
 
-MIT, siehe [LICENSE.md](LICENSE.md) für Details.
-Abhängigkeiten sind auch unter MIT lizensiert, siehe [static-queue/README.md](deps/static-queue/README.md)
+MIT, see [LICENSE.md](LICENSE.md) for details.
+Dependencies are also licensed under MIT, see [static-queue/README.md](deps/static-queue/README.md)
